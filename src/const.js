@@ -1,20 +1,29 @@
-const QantityValue = {
-  LOW: 10,
-  MEDIUM: 20,
+const TITLE_MAX_LENGTH = 50;
+
+const ItemsQantity = {
+  Low: {
+    CLASS_NAME: 'item-quantity level-low',
+    VALUE: 10,
+  },
+  Medium: {
+    CLASS_NAME: 'item-quantity level-medium',
+    VALUE: 20,
+  },
+  High: {
+    CLASS_NAME: 'item-quantity level-high',
+  },
 }
 
 const CURRENCIES = {
   Dollar: {
     NAME: 'USD',
-    SYMBOL: '$'
+    SYMBOL: '$',
   },
 
   Euro: {
     NAME: 'EUR',
-    SYMBOL: '€'
+    SYMBOL: '€',
   },
 }
 
-const TITLE_MAX_LENGTH = 50;
-
-export {CURRENCIES, QantityValue, TITLE_MAX_LENGTH};
+export {CURRENCIES, ItemsQantity, TITLE_MAX_LENGTH};

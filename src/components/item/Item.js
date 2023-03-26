@@ -1,30 +1,37 @@
 import PropTypes from 'prop-types';
-import { CURRENCIES, QantityValue, TITLE_MAX_LENGTH } from '../../const';
+import { CURRENCIES, ItemsQantity, TITLE_MAX_LENGTH } from '../../const';
 
 export default function Item (props) {
 
-  const {title, price, currency_code, quantity, url, MainImage} = props.itemData;
-
-  const imgSrc = MainImage.url_570xN;
+  const { 
+    title, 
+    price, 
+    currency_code: currCode, 
+    quantity, 
+    url, 
+    MainImage: {
+      url_570xN: imgSrc,
+    },
+  } = props.itemData;
 
   const getQantityClassName = () => {
-    if (quantity <= QantityValue.LOW) {
-      return 'item-quantity level-low'
+    if (quantity <= ItemsQantity.Low.VALUE) {
+      return ItemsQantity.Low.CLASS_NAME
     }
-    if (quantity <= QantityValue.MEDIUM) {
-      return 'item-quantity level-medium'
+    if (quantity <= ItemsQantity.Medium.VALUE) {
+      return ItemsQantity.Medium.CLASS_NAME
     } 
-    return 'item-quantity level-high'
+    return ItemsQantity.High.CLASS_NAME
   }
 
   const getPriceCurrency = () => {
-    if (currency_code === CURRENCIES.Dollar.NAME) {
+    if (currCode === CURRENCIES.Dollar.NAME) {
       return CURRENCIES.Dollar.SYMBOL + price
     }
-    if (currency_code === CURRENCIES.Euro.NAME) {
+    if (currCode === CURRENCIES.Euro.NAME) {
       return CURRENCIES.Euro.SYMBOL + price
     }
-    return price + ' ' + currency_code
+    return price + ' ' + currCode
   }
 
   const getTitleByLength = () => {
@@ -33,8 +40,6 @@ export default function Item (props) {
     }
     return title
   }
-    
-  console.log(props);
 
   return (
     <div className="item">
@@ -58,5 +63,8 @@ Item.propTypes = {
   currency_code: PropTypes.string,
   price: PropTypes.string,
   quantity: PropTypes.number,
-  url_570xN: PropTypes.string
+  MainImage: PropTypes.shape({
+    url_570xN: PropTypes.string
+  }),
+  
 }
